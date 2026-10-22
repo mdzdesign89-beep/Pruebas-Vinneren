@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@import "./styles/tokens.css";
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-superficie-base font-sans text-texto-primario antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-borde-foco;
+  }
+}

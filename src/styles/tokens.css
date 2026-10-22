@@ -1,0 +1,153 @@
+/*
+ * Design tokens — espejo de la colección "Tokens" (modo "Claro") del archivo
+ * Figma "Prueba 3B". Nombres: `color/acento/700` → `--color-acento-700`.
+ *
+ * Se declaran dentro de @theme para que Tailwind genere utilidades a partir de
+ * ellos (bg-acento-700, text-texto-primario, rounded-md, shadow-e1…). La paleta
+ * por defecto de Tailwind se elimina para que solo existan valores del sistema.
+ */
+
+@theme {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* ── Primitivos · marca ─────────────────────────────── */
+  --color-marca-plum-800: #4a1442;
+  --color-marca-brand-700: #6b2e93;
+
+  /* ── Primitivos · acento ────────────────────────────── */
+  --color-acento-900: #32186c;
+  --color-acento-800: #3a2180;
+  --color-acento-750: #3f2285;
+  --color-acento-700: #4b2a9d;
+  --color-acento-500: #7659c9;
+  --color-acento-300: #cfc4ef;
+  --color-acento-200: #d2c6ef;
+  --color-acento-100: #e8e3f8;
+  --color-acento-50: #f2eefc;
+  --color-acento-anillo: #b9a8e0;
+
+  /* ── Primitivos · neutro ────────────────────────────── */
+  --color-neutro-ink: #1c1424;
+  --color-neutro-ink-700: #4a4458;
+  --color-neutro-ink-600: #5a5468;
+  --color-neutro-ink-500: #6b6478;
+  --color-neutro-ink-450: #7e7691;
+  --color-neutro-ink-400: #8e86a3;
+  --color-neutro-ink-300: #9a94a8;
+  --color-neutro-line-strong: #d9d4e3;
+  --color-neutro-line: #e6e3ec;
+  --color-neutro-surface-alt: #f3f1f7;
+  --color-neutro-bg: #f6f4fa;
+  --color-neutro-surface: #ffffff;
+
+  /* ── Estado ─────────────────────────────────────────── */
+  --color-estado-ok-bg: #d7f2e6;
+  --color-estado-ok-text: #0e5c45;
+  --color-estado-warn-bg: #fbebd6;
+  --color-estado-warn-text: #7e4610;
+  --color-estado-bad-bg: #fbdce4;
+  --color-estado-bad-text: #a81b4a;
+  --color-estado-info-bg: #e8e3f8;
+  --color-estado-info-text: #3a2180;
+  --color-estado-neutral-bg: #d1cbde;
+  --color-estado-neutral-text: #3f3a4d;
+
+  /* ── Barra ──────────────────────────────────────────── */
+  --color-barra-ok: #128a63;
+  --color-barra-warn: #b4710f;
+  --color-barra-bad: #b82a52;
+  --color-barra-pista-ok: #d4eae3;
+  --color-barra-pista-warn: #f2e5d4;
+  --color-barra-pista-bad: #f2d9e0;
+
+  /* ── Tipo de turno ──────────────────────────────────── */
+  --color-tipo-registro-bg: #e8e3f8;
+  --color-tipo-registro-text: #3a2180;
+  --color-tipo-atencion-bg: #dce7f6;
+  --color-tipo-atencion-text: #1c4c7c;
+  --color-tipo-logistica-bg: #d6eee9;
+  --color-tipo-logistica-text: #0e5c52;
+  --color-tipo-seguridad-bg: #fbebd6;
+  --color-tipo-seguridad-text: #7e4610;
+  --color-tipo-food-bg: #deefd6;
+  --color-tipo-food-text: #2f5d1e;
+  --color-tipo-produccion-bg: #f7dee8;
+  --color-tipo-produccion-text: #8a1e52;
+
+  --color-overlay-scrim: #1c142466;
+
+  /* ── Semánticos (alias, igual que en Figma) ─────────── */
+  --color-superficie-base: var(--color-neutro-bg);
+  --color-superficie-elevada: var(--color-neutro-surface);
+  --color-superficie-sutil: var(--color-neutro-surface-alt);
+  --color-superficie-seleccionada: var(--color-acento-100);
+  --color-superficie-hover: var(--color-acento-50);
+
+  --color-texto-primario: var(--color-neutro-ink);
+  --color-texto-secundario: var(--color-neutro-ink-700);
+  --color-texto-terciario: var(--color-neutro-ink-500);
+  --color-texto-deshabilitado: var(--color-neutro-ink-450);
+  --color-texto-inverso: var(--color-neutro-surface);
+  --color-texto-acento: var(--color-acento-700);
+
+  --color-borde-sutil: var(--color-neutro-line);
+  --color-borde-fuerte: var(--color-neutro-line-strong);
+  --color-borde-control: var(--color-neutro-ink-400);
+  --color-borde-foco: var(--color-acento-700);
+  --color-borde-foco-inverso: var(--color-acento-anillo);
+
+  --color-accion-primaria: var(--color-acento-700);
+  --color-accion-primaria-hover: var(--color-acento-750);
+  --color-accion-primaria-activa: var(--color-acento-900);
+  --color-accion-primaria-anillo: var(--color-acento-anillo);
+  --color-accion-secundaria-borde: var(--color-neutro-ink-400);
+  --color-accion-secundaria-hover-bg: var(--color-acento-50);
+  --color-accion-secundaria-activa-bg: var(--color-acento-100);
+
+  /*
+   * Espacio — `espacio/16` = 16px. Con la unidad base en 1px, las utilidades
+   * usan el mismo número que el token: p-16, gap-24, px-12…
+   */
+  --spacing: 1px;
+
+  /* ── Radio ──────────────────────────────────────────── */
+  --radius-*: initial;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-pill: 999px;
+
+  /* Trazo: hairline = `border` (1px), icono = 1.25px, foco = `outline-2`. */
+
+  /* ── Tipografía ─────────────────────────────────────── */
+  --font-*: initial;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --leading-ajustado: 1.2;
+  --leading-normal: 1.45;
+
+  /* ── Elevación (estilos de efecto) ──────────────────── */
+  --shadow-*: initial;
+  --shadow-e1: 0 1px 2px 0 #1c14240f, 0 1px 3px 0 #1c14241a;
+  --shadow-e2: 0 2px 4px 0 #1c14240f, 0 6px 16px 0 #1c14241a;
+  --shadow-e3: 0 4px 8px 0 #1c142412, 0 12px 28px 0 #1c142424;
+  --shadow-e4: -8px 8px 16px 0 #1c142417, -8px 24px 56px 0 #1c142433;
+}
+
+/* ── Estilos de texto (Figma text styles) ─────────────────
+ * Figma define line-height "auto" (≈ normal) en todos los estilos.
+ */
+@utility text-dato-xl { font-size: 28px; font-weight: 700; line-height: normal; }
+@utility text-titulo-xl { font-size: 20px; font-weight: 600; line-height: normal; }
+@utility text-titulo-m { font-size: 16px; font-weight: 600; line-height: normal; }
+@utility text-titulo-s { font-size: 14px; font-weight: 600; line-height: normal; }
+@utility text-titulo-xs { font-size: 12px; font-weight: 600; line-height: normal; }
+@utility text-navegacion-l { font-size: 14px; font-weight: 500; line-height: normal; }
+@utility text-cuerpo-l { font-size: 14px; font-weight: 400; line-height: normal; }
+@utility text-cuerpo-m { font-size: 13px; font-weight: 500; line-height: normal; }
+@utility text-cuerpo-s { font-size: 12px; font-weight: 400; line-height: normal; }
+@utility text-etiqueta-l { font-size: 12px; font-weight: 500; line-height: normal; }
+@utility text-etiqueta-m { font-size: 10px; font-weight: 600; line-height: normal; }
+@utility text-etiqueta-micro { font-size: 10px; font-weight: 400; line-height: normal; }
