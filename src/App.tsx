@@ -3,9 +3,9 @@ import CalendarPage from "@/pages/CalendarPage"
 import DashboardPage from "@/pages/DashboardPage"
 import PlaceholderPage from "@/pages/PlaceholderPage"
 import TurnosPage from "@/pages/TurnosPage"
+import VoluntariosPage from "@/pages/VoluntariosPage"
 
 const pendientes = [
-  { path: "/voluntarios", title: "Voluntarios" },
   { path: "/escenarios", title: "Escenarios y actividades" },
   { path: "/settings", title: "Settings" },
 ]
@@ -17,6 +17,7 @@ export default function App() {
         <Route path="/" element={<DashboardPage />} />
         <Route path="/calendario" element={<CalendarPage />} />
         <Route path="/turnos" element={<TurnosPage />} />
+        <Route path="/voluntarios" element={<VoluntariosPage />} />
         {pendientes.map((p) => (
           <Route key={p.path} path={p.path} element={<PlaceholderPage title={p.title} />} />
         ))}
