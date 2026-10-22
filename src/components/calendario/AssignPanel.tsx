@@ -168,17 +168,19 @@ export function AssignPanel({ dia, actividad, turno, onClose, onConfirm }: Assig
               const asignado = i < asignados
               const propuesto = !asignado && i < asignados + seleccion.length
               return (
-                <span
-                  key={i}
-                  className={cn(
-                    "relative h-10 min-w-0 flex-1 overflow-hidden rounded-[3px] transition-colors duration-200",
-                    asignado ? "bg-borde-sutil" : propuesto ? "bg-acento-300" : "bg-borde-sutil",
-                  )}
-                >
-                  {asignado && (
+                <span key={i} className="relative h-10 min-w-0 flex-1 overflow-hidden rounded-[3px] bg-borde-sutil">
+                  {asignado ? (
                     <span
                       className="absolute inset-0 origin-left animate-llenar rounded-[3px] bg-accion-primaria"
                       style={{ animationDelay: `${ENTRADA_MS + i * PASO_BARRA_MS}ms` }}
+                    />
+                  ) : (
+                    // Segmento propuesto: se llena (o vacía) al marcar/desmarcar un voluntario.
+                    <span
+                      className={cn(
+                        "absolute inset-0 origin-left rounded-[3px] bg-acento-300 transition-transform duration-250 ease-out motion-reduce:transition-none",
+                        propuesto ? "scale-x-100" : "scale-x-0",
+                      )}
                     />
                   )}
                 </span>
