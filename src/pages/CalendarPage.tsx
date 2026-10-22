@@ -152,7 +152,9 @@ export default function CalendarPage() {
       {panel && (
         <AssignPanel
           key={panel.turno.id}
-          {...panel}
+          turno={panel.turno}
+          fecha={panel.dia.corto}
+          contexto={`${panel.actividad.nombre} · ${panel.actividad.lugar}`}
           onClose={() => setPanelTurnoId(null)}
           onConfirm={(nombres) =>
             updateTurno(panel.turno.id, (t) => setVoluntarios(t, [...t.voluntarios, ...nombres]))

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import checkboxMarcado from "@/assets/icons/checkbox-marcado.svg"
 import exitoMarca from "@/assets/icons/exito-marca.svg"
 import { Button } from "@/components/ui/Button"
-import type { Actividad, Dia, Turno } from "@/data/calendario"
+import type { Turno } from "@/data/calendario"
 import { recomendados, type Recomendado } from "@/data/recomendados"
 import { cn } from "@/lib/utils"
 
@@ -18,9 +18,11 @@ const historialTono = {
 }
 
 interface AssignPanelProps {
-  dia: Dia
-  actividad: Actividad
   turno: Turno
+  /** Día corto del turno, p. ej. "Sáb 13". */
+  fecha: string
+  /** Tercera línea del encabezado, p. ej. "Programa infantil · Foro Jardín". */
+  contexto: string
   onClose: () => void
   onConfirm: (nombres: string[]) => void
 }
@@ -181,7 +183,7 @@ function SuccessView({ turno, exito }: { turno: Turno; exito: Exito }) {
   )
 }
 
-export function AssignPanel({ dia, actividad, turno, onClose, onConfirm }: AssignPanelProps) {
+export function AssignPanel({ turno, fecha, contexto, onClose, onConfirm }: AssignPanelProps) {
   const disponibles = recomendados.filter((r) => !turno.voluntarios.includes(r.nombre))
   const libres = Math.max(0, turno.cupo - turno.voluntarios.length)
 
@@ -242,11 +244,9 @@ export function AssignPanel({ dia, actividad, turno, onClose, onConfirm }: Assig
         <div className="flex flex-col gap-4 rounded-lg bg-accion-primaria p-12">
           <p className="text-etiqueta-l text-texto-inverso/90">{turno.nombre}</p>
           <p className="text-titulo-m text-texto-inverso">
-            {dia.corto} · {turno.horario.replace(" – ", "–")}
+            {fecha} · {turno.horario.replace(" – ", "–")}
           </p>
-          <p className="text-cuerpo-s text-texto-inverso/90">
-            {actividad.nombre} · {actividad.lugar}
-          </p>
+          <p className="text-cuerpo-s text-texto-inverso/90">{contexto}</p>
         </div>
       </header>
 
