@@ -43,7 +43,7 @@ export default function DashboardPage() {
           <ShiftDetail />
         </div>
 
-        <div className="flex w-full flex-col gap-24 lg:flex-row lg:items-start">
+        <div className="flex w-full flex-col gap-24 lg:flex-row">
           <ConflictsCard />
           <FunnelChart />
         </div>
