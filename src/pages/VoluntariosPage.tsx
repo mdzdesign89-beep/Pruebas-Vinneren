@@ -1,8 +1,11 @@
 import { useState } from "react"
 import agregar from "@/assets/icons/agregar.svg"
+import { AssignPanel } from "@/components/calendario/AssignPanel"
 import { AppShell } from "@/components/layout/AppShell"
 import { Button } from "@/components/ui/Button"
+import { VolunteerProfile } from "@/components/voluntarios/VolunteerProfile"
 import { VoluntariosTable } from "@/components/voluntarios/VoluntariosTable"
+import { turnosAbiertos as turnosIniciales } from "@/data/perfil"
 import { voluntarios } from "@/data/voluntarios"
 
 const unicos = (xs: string[]) => [...new Set(xs)].sort((a, b) => a.localeCompare(b, "es"))
@@ -26,6 +29,15 @@ export default function VoluntariosPage() {
   const [valores, setValores] = useState<Record<FiltroId, string>>({ estado: "", locacion: "", habilidad: "" })
   const [busqueda, setBusqueda] = useState("")
   const [checked, setChecked] = useState<Set<string>>(new Set())
+  const [turnos, setTurnos] = useState(turnosIniciales)
+  const [perfilId, setPerfilId] = useState<string | null>(null)
+  const [asignandoId, setAsignandoId] = useState<string | null>(null)
+
+  const perfil = voluntarios.find((v) => v.id === perfilId) ?? null
+  const asignando = turnos.find((t) => t.id === asignandoId) ?? null
+
+  const sumarVoluntarios = (turnoId: string, nombres: string[]) =>
+    setTurnos((ts) => ts.map((t) => (t.id === turnoId ? { ...t, voluntarios: [...t.voluntarios, ...nombres] } : t)))
 
   const q = normalizar(busqueda.trim())
   const filas = voluntarios.filter(
@@ -87,8 +99,33 @@ export default function VoluntariosPage() {
           </Button>
         </div>
 
-        <VoluntariosTable rows={filas} checked={checked} onToggle={toggle} />
+        <VoluntariosTable rows={filas} checked={checked} onToggle={toggle} abiertoId={perfilId} onAbrir={setPerfilId} />
       </main>
+
+      {perfil && (
+        <VolunteerProfile
+          key={perfil.id}
+          voluntario={perfil}
+          turnos={turnos}
+          onClose={() => setPerfilId(null)}
+          onAsignar={(turnoId) => sumarVoluntarios(turnoId, [perfil.nombre])}
+          onBuscarOtro={(turnoId) => {
+            setPerfilId(null)
+            setAsignandoId(turnoId)
+          }}
+        />
+      )}
+
+      {asignando && (
+        <AssignPanel
+          key={asignando.id}
+          turno={asignando}
+          fecha={asignando.dia}
+          contexto={asignando.programa ? `${asignando.programa} · ${asignando.lugar}` : asignando.lugar}
+          onClose={() => setAsignandoId(null)}
+          onConfirm={(nombres) => sumarVoluntarios(asignando.id, nombres)}
+        />
+      )}
     </AppShell>
   )
 }

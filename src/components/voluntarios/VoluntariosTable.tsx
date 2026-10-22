@@ -2,6 +2,7 @@ import puntoActivo from "@/assets/icons/punto-activo.svg"
 import puntoInactivo from "@/assets/icons/punto-inactivo.svg"
 import puntoOnboarding from "@/assets/icons/punto-onboarding.svg"
 import type { EstadoVoluntario, Voluntario } from "@/data/voluntarios"
+import { cn } from "@/lib/utils"
 
 const punto: Record<EstadoVoluntario, string> = {
   Activo: puntoActivo,
@@ -28,9 +29,11 @@ interface VoluntariosTableProps {
   rows: Voluntario[]
   checked: Set<string>
   onToggle: (id: string) => void
+  abiertoId: string | null
+  onAbrir: (id: string) => void
 }
 
-export function VoluntariosTable({ rows, checked, onToggle }: VoluntariosTableProps) {
+export function VoluntariosTable({ rows, checked, onToggle, abiertoId, onAbrir }: VoluntariosTableProps) {
   return (
     <div className="w-full overflow-hidden rounded-md border border-borde-fuerte bg-superficie-elevada">
       <div className="overflow-x-auto">
@@ -55,9 +58,15 @@ export function VoluntariosTable({ rows, checked, onToggle }: VoluntariosTablePr
               return (
                 <tr
                   key={v.id}
-                  className={`h-48 transition-colors hover:bg-superficie-hover [&>td]:pr-12 [&>td:first-child]:pl-24 [&>td:last-child]:pr-24 ${i < rows.length - 1 ? "border-b border-borde-sutil" : ""}`}
+                  onClick={() => onAbrir(v.id)}
+                  aria-selected={v.id === abiertoId}
+                  className={cn(
+                    "h-48 cursor-pointer transition-colors [&>td]:pr-12 [&>td:first-child]:pl-24 [&>td:last-child]:pr-24",
+                    v.id === abiertoId ? "bg-superficie-seleccionada" : "hover:bg-superficie-hover",
+                    i < rows.length - 1 && "border-b border-borde-sutil",
+                  )}
                 >
-                  <td>
+                  <td onClick={(e) => e.stopPropagation()}>
                     <input
                       type="checkbox"
                       aria-label={`Seleccionar a ${v.nombre}`}

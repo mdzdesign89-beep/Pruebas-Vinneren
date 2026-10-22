@@ -8,7 +8,7 @@ Prototipo en código del archivo Figma
 | `/` | Dashboard · A · Atención primero | [247:8115](https://www.figma.com/design/V41NFGo60QdVjpq8Bdg5mu/Prueba-3B?node-id=247-8115) |
 | `/calendario` | Calendario · A2 · Vista por turnos | [175:5127](https://www.figma.com/design/V41NFGo60QdVjpq8Bdg5mu/Prueba-3B?node-id=175-5127) |
 | `/turnos` | Turnos · A · Tabla + panel | [176:5628](https://www.figma.com/design/V41NFGo60QdVjpq8Bdg5mu/Prueba-3B?node-id=176-5628) |
-| `/voluntarios` | Banco de voluntarios | [247:9508](https://www.figma.com/design/V41NFGo60QdVjpq8Bdg5mu/Prueba-3B?node-id=247-9508) |
+| `/voluntarios` | Banco de voluntarios | [247:9508](https://www.figma.com/design/V41NFGo60QdVjpq8Bdg5mu/Prueba-3B?node-id=247-9508) | + overlay de perfil [247:9907](https://www.figma.com/design/V41NFGo60QdVjpq8Bdg5mu/Prueba-3B?node-id=247-9907)
 
 **Stack:** React 19 + TypeScript + Vite + Tailwind CSS v4 + React Router + Inter (`@fontsource`).
 
