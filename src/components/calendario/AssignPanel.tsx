@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import agregar from "@/assets/icons/agregar.svg"
+import checkboxMarcado from "@/assets/icons/checkbox-marcado.svg"
 import { Button } from "@/components/ui/Button"
 import type { Actividad, Dia, Turno } from "@/data/calendario"
 import { recomendados, type Recomendado } from "@/data/recomendados"
@@ -42,7 +43,8 @@ function VolunteerCard({
     <li className="animate-caer" style={{ animationDelay: `${delay}ms` }}>
       <label
         className={cn(
-          "flex w-full items-center gap-8 rounded-lg bg-superficie-elevada px-12 py-8 shadow-e2",
+          "flex w-full items-center gap-8 rounded-lg px-12 py-8 shadow-e2 transition-colors duration-200",
+          checked ? "bg-acento-50" : "bg-superficie-elevada",
           disabled ? "cursor-not-allowed" : "cursor-pointer",
         )}
       >
@@ -52,15 +54,15 @@ function VolunteerCard({
             checked={checked}
             disabled={disabled}
             onChange={onToggle}
-            className="peer size-18 cursor-[inherit] appearance-none rounded-sm border-[1.5px] border-texto-deshabilitado bg-superficie-elevada transition-colors checked:border-accion-primaria checked:bg-accion-primaria disabled:opacity-50"
+            className="peer size-18 cursor-[inherit] appearance-none rounded-sm border-[1.5px] border-texto-deshabilitado bg-superficie-elevada checked:border-transparent disabled:opacity-50"
           />
-          <svg
-            aria-hidden
-            viewBox="0 0 16 16"
-            className="pointer-events-none absolute inset-0 hidden size-18 text-texto-inverso peer-checked:block"
-          >
-            <path d="M4 8.5l2.5 2.5L12 5.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <img
+            src={checkboxMarcado}
+            alt=""
+            width={18}
+            height={18}
+            className="pointer-events-none absolute inset-0 hidden size-18 peer-checked:block"
+          />
         </span>
         <span className="flex size-32 shrink-0 items-center justify-center rounded-pill bg-estado-neutral-bg text-etiqueta-m text-estado-neutral-text">
           {v.iniciales}
@@ -95,8 +97,7 @@ export function AssignPanel({ dia, actividad, turno, onClose, onConfirm }: Assig
   const disponibles = recomendados.filter((r) => !turno.voluntarios.includes(r.nombre))
   const libres = Math.max(0, turno.cupo - turno.voluntarios.length)
 
-  // Propuesta asistida: se preseleccionan los primeros recomendados hasta llenar el cupo.
-  const [seleccion, setSeleccion] = useState<string[]>(() => disponibles.slice(0, libres).map((r) => r.nombre))
+  const [seleccion, setSeleccion] = useState<string[]>([])
   const [saliendo, setSaliendo] = useState(false)
   const panelRef = useRef<HTMLElement>(null)
 
@@ -231,18 +232,24 @@ export function AssignPanel({ dia, actividad, turno, onClose, onConfirm }: Assig
       </div>
 
       <footer className="shrink-0 border-t border-borde-sutil px-20 pb-20 pt-16">
-        <Button
-          variant="primary"
-          className="w-full justify-center"
-          disabled={seleccion.length === 0}
-          onClick={() => {
-            onConfirm(seleccion)
-            cerrar()
-          }}
-        >
-          Confirmar {seleccion.length} asignaci{seleccion.length === 1 ? "ón" : "ones"}
-          <img src={agregar} alt="" width={20} height={20} className="size-20" />
-        </Button>
+        {seleccion.length === 0 ? (
+          // Btn · Secondary · Disabled hasta que se marque al menos un voluntario.
+          <Button variant="secondary" className="w-full justify-center" disabled>
+            Asignar voluntario
+          </Button>
+        ) : (
+          <Button
+            variant="primary"
+            className="w-full justify-center"
+            onClick={() => {
+              onConfirm(seleccion)
+              cerrar()
+            }}
+          >
+            Confirmar {seleccion.length} asignaci{seleccion.length === 1 ? "ón" : "ones"}
+            <img src={agregar} alt="" width={20} height={20} className="size-20" />
+          </Button>
+        )}
       </footer>
     </aside>
   )

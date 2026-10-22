@@ -7,11 +7,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "md" | "sm"
 }
 
+// Estados del componente Btn de Figma (Jerarquía × Estado), incluido Disabled.
 const variants = {
   primary:
-    "bg-accion-primaria text-texto-inverso hover:bg-accion-primaria-hover active:bg-accion-primaria-activa",
+    "bg-accion-primaria text-texto-inverso enabled:hover:bg-accion-primaria-hover enabled:active:bg-accion-primaria-activa disabled:bg-accion-deshabilitada-bg disabled:text-accion-deshabilitada-texto",
   secondary:
-    "border border-accion-secundaria-borde bg-superficie-elevada text-texto-primario hover:bg-accion-secundaria-hover-bg active:bg-accion-secundaria-activa-bg",
+    "border border-accion-secundaria-borde bg-superficie-elevada text-texto-primario enabled:hover:bg-accion-secundaria-hover-bg enabled:active:bg-accion-secundaria-activa-bg disabled:border-accion-deshabilitada-borde disabled:bg-accion-deshabilitada-sec-bg disabled:text-accion-deshabilitada-texto",
 }
 
 const sizes = {
@@ -24,7 +25,7 @@ export function Button({ variant = "secondary", size = "md", className, ...props
     <button
       type="button"
       className={cn(
-        "inline-flex shrink-0 cursor-pointer items-center gap-4 whitespace-nowrap transition-colors disabled:cursor-default disabled:text-texto-deshabilitado",
+        "inline-flex shrink-0 cursor-pointer items-center gap-4 whitespace-nowrap transition-colors disabled:cursor-not-allowed",
         variants[variant],
         sizes[size],
         className,

@@ -105,6 +105,10 @@
   --color-accion-secundaria-borde: var(--color-neutro-ink-400);
   --color-accion-secundaria-hover-bg: var(--color-acento-50);
   --color-accion-secundaria-activa-bg: var(--color-acento-100);
+  --color-accion-deshabilitada-bg: var(--color-neutro-line);
+  --color-accion-deshabilitada-sec-bg: var(--color-neutro-surface-alt);
+  --color-accion-deshabilitada-borde: var(--color-neutro-line);
+  --color-accion-deshabilitada-texto: var(--color-neutro-ink-450);
 
   /*
    * Espacio — `espacio/16` = 16px. Con la unidad base en 1px, las utilidades
