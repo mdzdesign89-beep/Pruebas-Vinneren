@@ -3,9 +3,9 @@ import avatar from "@/assets/icons/avatar-sm.svg"
 import { Button } from "@/components/ui/Button"
 import { Chip } from "@/components/ui/Chip"
 import type { TurnoFila } from "@/data/turnos"
-import { cn } from "@/lib/utils"
 
 const VISIBLES = 3
+const PASO_BARRA_MS = 250
 
 interface TurnoPanelProps {
   turno: TurnoFila
@@ -18,6 +18,14 @@ const divider = <div className="h-2 w-full shrink-0 bg-borde-fuerte" />
 export function TurnoPanel({ turno, onAsignar, onQuitar }: TurnoPanelProps) {
   const [verTodos, setVerTodos] = useState(false)
   const asignados = turno.voluntarios.length
+
+  // Segmentos que ya estaban llenos antes del último cambio (0 al montar el panel).
+  const [previos, setPrevios] = useState(asignados)
+  const [llenos, setLlenos] = useState(0)
+  if (asignados !== previos) {
+    setLlenos(Math.min(previos, asignados))
+    setPrevios(asignados)
+  }
   const lleno = asignados >= turno.cupo
   const minimoPct = (turno.minimo / turno.cupo) * 100
   const lista = verTodos ? turno.voluntarios : turno.voluntarios.slice(0, VISIBLES)
@@ -55,10 +63,15 @@ export function TurnoPanel({ turno, onAsignar, onQuitar }: TurnoPanelProps) {
         <h3 className="text-titulo-s text-texto-primario">Cobertura del turno</h3>
         <div className="flex w-full gap-4" role="img" aria-label={`${asignados} de ${turno.cupo} asignados, mínimo ${turno.minimo}`}>
           {Array.from({ length: turno.cupo }, (_, i) => (
-            <span
-              key={i}
-              className={cn("h-10 min-w-0 flex-1 rounded-[3px]", i < asignados ? "bg-accion-primaria" : "bg-acento-300")}
-            />
+            <span key={i} className="relative h-10 min-w-0 flex-1 overflow-hidden rounded-[3px] bg-acento-300">
+              {i < asignados && (
+                // Se llenan uno por uno; al agregar voluntarios solo se animan los nuevos.
+                <span
+                  className="absolute inset-0 origin-left animate-llenar rounded-[3px] bg-accion-primaria"
+                  style={{ animationDelay: `${Math.max(0, i - llenos) * PASO_BARRA_MS}ms` }}
+                />
+              )}
+            </span>
           ))}
         </div>
         <div className="relative h-14 w-full text-etiqueta-s">
