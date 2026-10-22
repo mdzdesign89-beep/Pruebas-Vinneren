@@ -150,5 +150,6 @@
 @utility text-cuerpo-m { font-size: 13px; font-weight: 500; line-height: normal; }
 @utility text-cuerpo-s { font-size: 12px; font-weight: 400; line-height: normal; }
 @utility text-etiqueta-l { font-size: 12px; font-weight: 500; line-height: normal; }
-@utility text-etiqueta-m { font-size: 10px; font-weight: 600; line-height: normal; }
+@utility text-etiqueta-s { font-size: 10px; font-weight: 500; line-height: normal; }
+@utility text-etiqueta-m {font-size: 10px; font-weight: 600; line-height: normal; }
 @utility text-etiqueta-micro { font-size: 10px; font-weight: 400; line-height: normal; }

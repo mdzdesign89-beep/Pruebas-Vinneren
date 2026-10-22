@@ -1,0 +1,42 @@
+/*
+ * Animaciones de entrada. Los retrasos escalonados se pasan por
+ * `style={{ animationDelay }}` desde cada componente.
+ */
+
+@theme {
+  --ease-salida: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-panel-entrar: panel-entrar 500ms var(--ease-salida) both;
+  --animate-panel-salir: panel-salir 500ms var(--ease-salida) both;
+  --animate-llenar: llenar 250ms ease-out both;
+  --animate-caer: caer 300ms var(--ease-salida) both;
+
+  @keyframes panel-entrar {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+
+  @keyframes panel-salir {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+  }
+
+  @keyframes llenar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  @keyframes caer {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+  }
+}

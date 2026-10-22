@@ -1,10 +1,11 @@
 import { useState } from "react"
+import { AssignPanel } from "@/components/calendario/AssignPanel"
 import { DayColumn } from "@/components/calendario/DayColumn"
 import { PeriodSelector, type Vista } from "@/components/calendario/PeriodSelector"
 import { ShiftDetailPanel } from "@/components/calendario/ShiftDetailPanel"
 import { AppShell } from "@/components/layout/AppShell"
 import { Button } from "@/components/ui/Button"
-import { dias as diasIniciales, estadoPorCobertura, VOLUNTARIOS, type Turno } from "@/data/calendario"
+import { dias as diasIniciales, estadoPorCobertura, type Turno } from "@/data/calendario"
 import { cn } from "@/lib/utils"
 
 type VerPor = "actividades" | "turnos"
@@ -28,8 +29,10 @@ export default function CalendarPage() {
   const [selectedId, setSelectedId] = useState<string | null>("sab-atencion")
   const [vista, setVista] = useState<Vista>("semana")
   const [diaIdx, setDiaIdx] = useState(1)
+  const [panelTurnoId, setPanelTurnoId] = useState<string | null>(null)
 
   const seleccion = buscarTurno(dias, selectedId)
+  const panel = buscarTurno(dias, panelTurnoId)
 
   const updateTurno = (id: string, fn: (t: Turno) => Turno) =>
     setDias((ds) =>
@@ -48,10 +51,6 @@ export default function CalendarPage() {
     ...estadoPorCobertura({ ...t, voluntarios }),
   })
 
-  const asignar = (t: Turno) => {
-    const libre = VOLUNTARIOS.find((v) => !t.voluntarios.includes(v))
-    if (libre) updateTurno(t.id, (x) => setVoluntarios(x, [...x.voluntarios, libre]))
-  }
 
   const toggleActividad = (id: string) =>
     setAbiertas((prev) => {
@@ -139,7 +138,7 @@ export default function CalendarPage() {
             <div className="lg:h-full">
               <ShiftDetailPanel
                 {...seleccion}
-                onAsignar={() => asignar(seleccion.turno)}
+                onAsignar={() => setPanelTurnoId(seleccion.turno.id)}
                 onQuitar={(nombre) =>
                   updateTurno(seleccion.turno.id, (t) => setVoluntarios(t, t.voluntarios.filter((v) => v !== nombre)))
                 }
@@ -149,6 +148,17 @@ export default function CalendarPage() {
           )}
         </div>
       </main>
+
+      {panel && (
+        <AssignPanel
+          key={panel.turno.id}
+          {...panel}
+          onClose={() => setPanelTurnoId(null)}
+          onConfirm={(nombres) =>
+            updateTurno(panel.turno.id, (t) => setVoluntarios(t, [...t.voluntarios, ...nombres]))
+          }
+        />
+      )}
     </AppShell>
   )
 }

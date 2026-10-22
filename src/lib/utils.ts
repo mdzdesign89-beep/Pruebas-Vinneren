@@ -11,7 +11,7 @@ const twMerge = extendTailwindMerge({
           text: [
             "dato-xl", "dato-m", "titulo-xl", "titulo-m", "titulo-s", "titulo-xs",
             "navegacion-l", "cuerpo-l", "cuerpo-m", "cuerpo-s",
-            "etiqueta-l", "etiqueta-m", "etiqueta-micro",
+            "etiqueta-l", "etiqueta-s", "etiqueta-m", "etiqueta-micro",
           ],
         },
       ],
