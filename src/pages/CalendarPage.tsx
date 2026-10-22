@@ -123,7 +123,7 @@ export default function CalendarPage() {
               ))}
             </div>
             <div className="pointer-events-none absolute inset-x-0 bottom-24 flex justify-center px-16">
-              <div className="pointer-events-auto max-w-full overflow-x-auto">
+              <div className="pointer-events-auto">
                 <PeriodSelector
                   rango={rango}
                   vista={vista}
