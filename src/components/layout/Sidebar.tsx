@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom"
 import calendario from "@/assets/icons/calendario.svg"
-import equipo from "@/assets/icons/equipo.svg"
 import escenarios from "@/assets/icons/escenarios.svg"
+import settings from "@/assets/icons/settings.svg"
 import turnos from "@/assets/icons/turnos.svg"
 import voluntarios from "@/assets/icons/voluntarios.svg"
 import { Icon } from "@/components/ui/Icon"
@@ -33,7 +33,7 @@ const principal: NavItem[] = [
 
 const secundaria: NavItem[] = [
   { to: "/escenarios", label: "Escenarios y actividades", icon: escenarios },
-  { to: "/settings", label: "Settings", icon: equipo },
+  { to: "/settings", label: "Settings", icon: settings },
 ]
 
 function Item({ to, label, icon }: NavItem) {
