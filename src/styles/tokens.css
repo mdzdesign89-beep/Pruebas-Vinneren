@@ -140,7 +140,8 @@
  * Figma define line-height "auto" (≈ normal) en todos los estilos.
  */
 @utility text-dato-xl { font-size: 28px; font-weight: 700; line-height: normal; }
-@utility text-titulo-xl { font-size: 20px; font-weight: 600; line-height: normal; }
+@utility text-dato-m { font-size: 18px; font-weight: 600; line-height: normal; }
+@utility text-titulo-xl {font-size: 20px; font-weight: 600; line-height: normal; }
 @utility text-titulo-m { font-size: 16px; font-weight: 600; line-height: normal; }
 @utility text-titulo-s { font-size: 14px; font-weight: 600; line-height: normal; }
 @utility text-titulo-xs { font-size: 12px; font-weight: 600; line-height: normal; }

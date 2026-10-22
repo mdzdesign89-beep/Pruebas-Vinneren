@@ -1,9 +1,14 @@
 # Turnos Festival · Dashboard
 
-Prototipo en código del dashboard "A · Atención primero" del archivo Figma
-[Prueba 3B](https://www.figma.com/design/V41NFGo60QdVjpq8Bdg5mu/Prueba-3B?node-id=247-8115).
+Prototipo en código del archivo Figma
+[Prueba 3B](https://www.figma.com/design/V41NFGo60QdVjpq8Bdg5mu/Prueba-3B).
 
-**Stack:** React 19 + TypeScript + Vite + Tailwind CSS v4 + Inter (`@fontsource`).
+| Ruta | Pantalla | Frame |
+| --- | --- | --- |
+| `/` | Dashboard · A · Atención primero | [247:8115](https://www.figma.com/design/V41NFGo60QdVjpq8Bdg5mu/Prueba-3B?node-id=247-8115) |
+| `/calendario` | Calendario · A2 · Vista por turnos | [175:5127](https://www.figma.com/design/V41NFGo60QdVjpq8Bdg5mu/Prueba-3B?node-id=175-5127) |
+
+**Stack:** React 19 + TypeScript + Vite + Tailwind CSS v4 + React Router + Inter (`@fontsource`).
 
 ## Desarrollo
 
@@ -36,4 +41,5 @@ a los primitivos con `var()`, igual que en Figma.
 ## Deploy
 
 Vercel detecta Vite automáticamente: framework **Vite**, build `npm run build`,
-output `dist`.
+output `dist`. `vercel.json` redirige todas las rutas a `index.html` para que
+`/calendario` funcione al recargar.

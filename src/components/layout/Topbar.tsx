@@ -1,10 +1,10 @@
 import avatar from "@/assets/icons/avatar.svg"
 
-export function Topbar() {
+export function Topbar({ title }: { title: string }) {
   return (
     <header className="flex h-64 w-full shrink-0 items-center justify-between gap-16 border-b border-borde-fuerte bg-superficie-elevada pl-24 pr-32">
       <div className="flex min-w-0 items-center gap-28">
-        <h1 className="text-titulo-xl text-texto-primario">Dashboard</h1>
+        <h1 className="text-titulo-xl text-texto-primario">{title}</h1>
         <button
           type="button"
           className="hidden cursor-pointer items-center whitespace-pre rounded-[6px] border border-borde-fuerte px-12 py-8 text-cuerpo-m text-texto-primario hover:bg-superficie-hover sm:flex"
